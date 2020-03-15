@@ -3,13 +3,13 @@ package r4tl.r4deathchest.listeners;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import r4tl.r4deathchest.ChestHandler;
+import r4tl.r4deathchest.DChestHandler;
 
 public class DeathListener implements Listener {
 	
-	ChestHandler cHand;
+	DChestHandler cHand;
 	
-	public DeathListener(ChestHandler c) {
+	public DeathListener(DChestHandler c) {
 		cHand = c;
 	}
 	

@@ -7,12 +7,12 @@ import r4tl.r4deathchest.listeners.DeathListener;
 
 public class R4DeathChest extends JavaPlugin {
 	
-	ChestHandler cHand;
+	DChestHandler cHand;
 	
 	@Override
 	public void onEnable() {
-		cHand = new ChestHandler();
-		getServer().getPluginManager().registerEvents(new DeathListener(), this);
+		cHand = new DChestHandler();
+		getServer().getPluginManager().registerEvents(new DeathListener(cHand), this);
 	}
 	
 	@Override

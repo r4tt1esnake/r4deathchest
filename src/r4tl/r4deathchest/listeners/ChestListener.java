@@ -8,13 +8,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import r4tl.r4deathchest.ChestHandler;
+import r4tl.r4deathchest.DChestHandler;
 
 public class ChestListener implements Listener {
 	
-	ChestHandler cHand;
+	DChestHandler cHand;
 	
-	public ChestListener(ChestHandler c) {
+	public ChestListener(DChestHandler c) {
 		cHand = c;
 	}
 	
@@ -24,7 +24,7 @@ public class ChestListener implements Listener {
 			Chest chest = (Chest) b;
 			// Drop the bloody items
 			
-			
+			cHand.remove(chest);
 		}
 	}
 
