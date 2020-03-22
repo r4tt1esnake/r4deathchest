@@ -5,11 +5,16 @@ import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.block.Chest;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public class ChestHandler {
 	
 	private Set<Location> dc = new HashSet<Location>();
-	private final String file = "config.txt";
+	private FileConfiguration locConfig;
+
+	public ChestHandler(FileConfiguration locConfig) {
+		this.locConfig = locConfig;
+	}
 
 	public void add(Chest c) {
 		dc.add(c.getLocation());
@@ -24,11 +29,19 @@ public class ChestHandler {
 	}
 	
 	public void read() {
-		
+		int size = locConfig.getInt("size");
+		for(int i = 0; i < size; i++) {
+			dc.add(locConfig.getLocation("location." + i));
+		}
 	}
 
 	public void write() {
-
+		locConfig.set("size", dc.size());
+		int i = 0;
+		for(Location l : dc) {
+			locConfig.set("location." + i, l);
+			i++;
+		}
 	}
 
 }

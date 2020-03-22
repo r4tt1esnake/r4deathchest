@@ -9,6 +9,8 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
@@ -44,8 +46,10 @@ public class DeathListener implements Listener {
 		
 		boolean second = drops.size() > 27;
 		Location[] chests = findNearestEmpty(p.getLocation(), second);
+		World world;
 		
 		if(chests.length == 1) {
+			world = chests[0].getWorld();
 			Block b = chests[0].getBlock();
 			b.setType(Material.CHEST);
 			Chest c = (Chest)(b.getState());
@@ -53,7 +57,9 @@ public class DeathListener implements Listener {
 			for(int i = 0; i < drops.size(); i++) {
 				c.getInventory().addItem(drops.get(i));
 			}
+			world.spawnParticle(Particle.EXPLOSION_HUGE, b.getLocation(), 1);
 		} else if(chests.length == 2) {
+			world = chests[0].getWorld();
 			Block b1 = chests[0].getBlock();
 			Block b2 = chests[1].getBlock();
 			b1.setType(Material.CHEST);
@@ -68,6 +74,8 @@ public class DeathListener implements Listener {
 			for(int i = 27; i < drops.size(); i++) {
 				c2.getInventory().addItem(drops.get(i));
 			}
+			world.spawnParticle(Particle.EXPLOSION_HUGE, b1.getLocation(), 1);
+			world.spawnParticle(Particle.EXPLOSION_HUGE, b2.getLocation(), 1);
 		}
 		if(chests.length != 0) drops.clear();
 	}

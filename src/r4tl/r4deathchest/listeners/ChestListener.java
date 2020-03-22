@@ -2,6 +2,7 @@ package r4tl.r4deathchest.listeners;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -24,7 +25,7 @@ public class ChestListener implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Block b = event.getClickedBlock();
-		if(b.getType().equals(Material.CHEST)) {
+		if(b != null && b.getType().equals(Material.CHEST)) {
 			Chest c = (Chest) b.getState();
 			if(chand.isDeathChest(c)) {
 				Inventory drop = c.getInventory();
@@ -36,6 +37,7 @@ public class ChestListener implements Listener {
 				chand.remove(c);
 				drop.clear();
 				b.setType(Material.AIR);
+				world.spawnParticle(Particle.EXPLOSION_HUGE, b.getLocation(), 1);
 				event.setCancelled(true);
 			}
 		}
