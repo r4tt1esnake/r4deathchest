@@ -1,5 +1,6 @@
 package r4tl.r4deathchest.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -24,6 +25,7 @@ public class ChestListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
+		if(event.getPlayer().getGameMode().equals(GameMode.SPECTATOR) || event.getPlayer().getGameMode().equals(GameMode.ADVENTURE)) return;
 		Block b = event.getClickedBlock();
 		if(b != null && b.getType().equals(Material.CHEST)) {
 			Chest c = (Chest) b.getState();
