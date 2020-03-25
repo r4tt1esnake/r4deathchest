@@ -89,7 +89,7 @@ public class DeathListener implements Listener {
 		int count = 0;
 		while(count <= SEARCH_LIMIT) {
 			Location curr = q.poll();
-			Bukkit.getConsoleSender().sendMessage("(X:" + curr.getBlockX() + ", Y:" + curr.getBlockY() + ", Z:" + curr.getBlockZ() + ')');
+			// Bukkit.getConsoleSender().sendMessage("(X:" + curr.getBlockX() + ", Y:" + curr.getBlockY() + ", Z:" + curr.getBlockZ() + ')');
 			// Do something if the block at the current location is air.
 			if(curr.getBlock().getType().equals(Material.AIR)) {
 				// Do we need a second chest?
