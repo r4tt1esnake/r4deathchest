@@ -32,7 +32,9 @@ public class ChestHandler {
 		int size = locConfig.getInt("size");
 		for(int i = 0; i < size; i++) {
 			dc.add(locConfig.getLocation("location." + i));
+			locConfig.set("location." + i, null);
 		}
+		locConfig.set("size", 0);
 	}
 
 	public void write() {
