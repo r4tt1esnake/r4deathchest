@@ -44,6 +44,10 @@ public class DeathListener implements Listener {
 			return;
 		}
 		
+		if(p.getLocation().getY() < 0) {
+			return;
+		}
+		
 		boolean second = drops.size() > 27;
 		Location[] chests = findNearestEmpty(p.getLocation(), second);
 		World world;
