@@ -52,12 +52,15 @@ public class DeathListener implements Listener {
 		Location[] chests = findNearestEmpty(p.getLocation(), second);
 		World world;
 		
+		if(chests == null) return;
+		
 		if(chests.length == 1) {
 			world = chests[0].getWorld();
 			Block b = chests[0].getBlock();
 			b.setType(Material.CHEST);
 			Chest c = (Chest)(b.getState());
 			chand.add(c);
+			logDeathChest(c.getLocation());
 			for(int i = 0; i < drops.size(); i++) {
 				c.getInventory().addItem(drops.get(i));
 			}
@@ -72,6 +75,8 @@ public class DeathListener implements Listener {
 			Chest c2 = (Chest)(b2.getState());
 			chand.add(c1);
 			chand.add(c2);
+			logDeathChest(c1.getLocation());
+			logDeathChest(c2.getLocation());
 			for(int i = 0; i < 27; i++) {
 				c1.getInventory().addItem(drops.get(i));
 			}
@@ -145,6 +150,10 @@ public class DeathListener implements Listener {
 		Bukkit.getConsoleSender().sendMessage("Search limit reached! Player death at (" + l.getBlockX() + ", " +
 				l.getBlockY() + ", " + l.getBlockZ() + ") was not deposited within a deathchest.");
 		return null;
+	}
+	
+	private void logDeathChest(Location l) {
+		Bukkit.getConsoleSender().sendMessage("Deathchest created at (X:" + l.getBlockX() + ", Y:" + l.getBlockY() + ", Z:" + l.getBlockZ() + ')');
 	}
 
 }
